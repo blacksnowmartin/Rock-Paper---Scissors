@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors Game</h1>
+    <p>Choose your move:</p>
+
+    <button onclick="playGame('rock')">Rock</button>
+    <button onclick="playGame('paper')">Paper</button>
+    <button onclick="playGame('scissors')">Scissors</button>
+
+    <p id="result"></p>
+
+    <script>
+        function playGame(playerMove) {
+            // Generate a random move for the computer
+            const moves = ['rock', 'paper', 'scissors'];
+            const computerMove = moves[Math.floor(Math.random() * 3)];
+
+            // Determine the winner
+            let result;
+            if (playerMove === computerMove) {
+                result = 'It\'s a tie!';
+            } else if (
+                (playerMove === 'rock' && computerMove === 'scissors') ||
+                (playerMove === 'paper' && computerMove === 'rock') ||
+                (playerMove === 'scissors' && computerMove === 'paper')
+            ) {
+                result = 'You win!';
+            } else {
+                result = 'Computer wins!';
+            }
+
+            // Display the result
+            document.getElementById('result').innerHTML = `You chose ${playerMove}. Computer chose ${computerMove}. ${result}`;
+        }
+    </script>
+
+</body>
+</html>
 
