@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-image: url('background-image.jpg'); /* Add your background image URL */
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        h1 {
+            color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors Game</h1>
+    <p>Choose your move:</p>
+
+    <button onclick="playGame('rock')">Rock</button>
+    <button onclick="playGame('paper')">Paper</button>
+    <button onclick="playGame('scissors')">Scissors</button>
+
+    <p id="result"></p>
+
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        let roundCount = 0;
+
+        function playGame(playerMove) {
+            // Generate a random move for the computer
+            const moves = ['rock', 'paper', 'scissors'];
+            const computerMove = moves[Math.floor(Math.random() * 3)];
+
+            // Determine the winner for the round
+            let result;
+            if (playerMove === computerMove) {
+                result = 'It\'s a tie!';
+            } else if (
+                (playerMove === 'rock' && computerMove === 'scissors') ||
+                (playerMove === 'paper' && computerMove === 'rock') ||
+                (playerMove === 'scissors' && computerMove === 'paper')
+            ) {
+                result = 'You win!';
+                playerScore++;
+            } else {
+                result = 'Computer wins!';
+                computerScore++;
+            }
+
+            // Display the result
+            document.getElementById('result').innerHTML = `Round ${++roundCount}: You chose ${playerMove}. Computer chose ${computerMove}. ${result}`;
+
+            // Check if the game is over (5 rounds)
+            if (roundCount === 5) {
+                // Display the final winner
+                document.getElementById('result').innerHTML += `<br>Game Over! Final Score: You ${playerScore} - ${computerScore} Computer`;
+                // Reset scores and rounds for a new game
+                playerScore = 0;
+                computerScore = 0;
+                roundCount = 0;
+            }
+        }
+    </script>
+
+</body>
+</html>
